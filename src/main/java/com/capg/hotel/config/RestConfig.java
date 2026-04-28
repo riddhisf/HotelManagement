@@ -11,5 +11,7 @@ public class RestConfig implements RepositoryRestConfigurer {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
         config.useHalAsDefaultJsonMediaType(false);
+
+
     }
 }
