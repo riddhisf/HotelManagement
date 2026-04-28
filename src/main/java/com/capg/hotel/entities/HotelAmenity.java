@@ -3,9 +3,16 @@ package com.capg.hotel.entities;
 import com.capg.hotel.dtos.HotelAmenityId;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
 
 @Entity
 @Table(name = "HotelAmenity")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class HotelAmenity {
 
     @EmbeddedId
@@ -21,38 +28,5 @@ public class HotelAmenity {
     @JoinColumn(name = "amenity_id")
     private Amenity amenity;
 
-	public HotelAmenityId getId() {
-		return id;
-	}
-
-	public void setId(HotelAmenityId id) {
-		this.id = id;
-	}
-
-	public Hotel getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-
-	public Amenity getAmenity() {
-		return amenity;
-	}
-
-	public void setAmenity(Amenity amenity) {
-		this.amenity = amenity;
-	}
-
-	public HotelAmenity(HotelAmenityId id, Hotel hotel, Amenity amenity) {
-		super();
-		this.id = id;
-		this.hotel = hotel;
-		this.amenity = amenity;
-	}
-
-	public HotelAmenity() {
-	}
     
 }

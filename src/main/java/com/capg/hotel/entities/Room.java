@@ -1,8 +1,14 @@
 package com.capg.hotel.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Room")
 public class Room {
 
@@ -17,52 +23,9 @@ public class Room {
     @Column(name = "is_available")
     private Boolean isAvailable;
 
-    // Foreign key mapping (IMPORTANT)
     @ManyToOne
     @JoinColumn(name = "room_type_id")
     private RoomType roomType;
 
-    // Constructors
-    public Room() {}
 
-    // Getters and Setters
-    public Integer getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(Integer roomId) {
-        this.roomId = roomId;
-    }
-
-    public Integer getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public Boolean getIsAvailable() {
-        return isAvailable;
-    }
-
-    public void setIsAvailable(Boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
-    public RoomType getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(RoomType roomType) {
-        this.roomType = roomType;
-    }
-
-	public Room(Integer roomId, Integer roomNumber, Boolean isAvailable, RoomType roomType) {
-		super();
-		this.roomId = roomId;
-		this.roomNumber = roomNumber;
-		this.isAvailable = isAvailable;
-		this.roomType = roomType;
-	}
 }
