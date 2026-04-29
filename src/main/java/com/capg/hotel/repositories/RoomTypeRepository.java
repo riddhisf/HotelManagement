@@ -6,10 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
-
-import com.capg.hotel.entities.Hotel;
 import com.capg.hotel.entities.RoomType;
-import com.capg.hotel.projections.RoomProjections;
 import com.capg.hotel.projections.RoomTypeProjections;	
 
 @RepositoryRestResource(
