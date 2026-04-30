@@ -23,6 +23,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     Page<Reservation> findByCheckInDate(LocalDate checkInDate, Pageable pageable);
 
     Page<Reservation> findByCheckOutDate(LocalDate checkOutDate, Pageable pageable);
-    
+
     Page<Reservation> findByRoom_RoomId(Integer roomId, Pageable pageable);
 }
