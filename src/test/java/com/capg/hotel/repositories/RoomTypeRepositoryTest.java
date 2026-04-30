@@ -1,6 +1,7 @@
-package com.capg.hotel.repositories;
+package com.capg.hotel.Repositories;
 
 import com.capg.hotel.entities.RoomType;
+import com.capg.hotel.repositories.RoomTypeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
