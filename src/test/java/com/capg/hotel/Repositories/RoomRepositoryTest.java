@@ -1,4 +1,4 @@
-package com.capg.hotel.Repositories;
+package com.capg.hotel.repositories;
 
 import com.capg.hotel.entities.Room;
 import com.capg.hotel.repositories.RoomRepository;
