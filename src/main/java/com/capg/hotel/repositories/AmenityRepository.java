@@ -7,10 +7,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import com.capg.hotel.entities.Amenity;
+import com.capg.hotel.projections.AmenityProjection;
 
 @RepositoryRestResource(
         path = "amenities",
-        collectionResourceRel = "amenities"
+        collectionResourceRel = "amenities",
+        excerptProjection = AmenityProjection.class
 )
 public interface AmenityRepository extends JpaRepository<Amenity,Integer> {
 	@RestResource(exported=false)
