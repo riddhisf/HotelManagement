@@ -1,27 +1,40 @@
 package com.capg.hotel.repositories;
 
 import com.capg.hotel.entities.Reservation;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Optional;
 
 @RepositoryRestResource(
         path = "reservations",
         collectionResourceRel = "reservations"
 )
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Page<Reservation> findAll(Pageable pageable);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Optional<Reservation> findById(Integer id);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Page<Reservation> findByGuestName(String guestName, Pageable pageable);
 
-    List<Reservation> findByGuestName(String guestName);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Page<Reservation> findByGuestPhone(String guestPhone, Pageable pageable);
 
-    List<Reservation> findByGuestPhone(String guestPhone);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Page<Reservation> findByGuestEmail(String guestEmail, Pageable pageable);
 
-    List<Reservation> findByGuestEmail(String guestEmail);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Page<Reservation> findByCheckInDate(LocalDate checkInDate, Pageable pageable);
 
-    List<Reservation> findByCheckInDate(LocalDate checkInDate);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+	Page<Reservation> findByCheckOutDate(LocalDate checkOutDate, Pageable pageable);
 
-    List<Reservation> findByCheckOutDate(LocalDate checkOutDate);
-
-    List<Reservation> findByRoom_RoomId(Integer roomId);
+	@EntityGraph(attributePaths = {"room", "room.hotel", "room.roomType"})
+    Page<Reservation> findByRoom_RoomId(Integer roomId, Pageable pageable);
 }
