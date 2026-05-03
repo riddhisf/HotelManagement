@@ -37,4 +37,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
 	@EntityGraph(attributePaths = {"hotel", "roomType"})
     Page<Room> findByIsAvailableFalse(Pageable pageable);
+
+	@EntityGraph(attributePaths = {"hotel", "roomType"})
+	Page<Room> findByHotel_HotelId(Integer hotelId, Pageable pageable);
 }
