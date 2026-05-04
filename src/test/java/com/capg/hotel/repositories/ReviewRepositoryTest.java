@@ -455,4 +455,56 @@ class ReviewRepositoryTest {
         assertEquals(result.getContent().size(), result.getTotalElements());
         assertEquals(3, result.getTotalElements());
     }
+    
+    @Test
+    @Transactional
+    void testFindByHotelName_validHotelName_returnsReviews() {
+        Hotel hotel = saveHotel(
+                "Test Oceanfront Resort",
+                "Beachfront",
+                "Luxury resort"
+        );
+        Room room = saveRoom(101, true, hotel);
+        Reservation res = saveReservation(
+                "John Doe", "john@test.com", "9876543210", room
+        );
+        saveReview(5, "Great hotel!", LocalDate.now(), res);
+
+        Page<Review> result = reviewRepository
+                .findByReservation_Room_Hotel_Name(
+                        "Test Oceanfront Resort",
+                        PageRequest.of(0, 10)
+                );
+
+        assertEquals(1, result.getContent().size());
+        assertEquals("Great hotel!", result.getContent().get(0).getComment());
+    }
+
+    @Test
+    void testFindByHotelName_invalidHotelName_returnsEmpty() {
+        Page<Review> result = reviewRepository
+                .findByReservation_Room_Hotel_Name(
+                        "Non Existent Hotel",
+                        PageRequest.of(0, 10)
+                );
+
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    void testFindByHotelName_hotelWithNoReviews_returnsEmpty() {
+        Hotel hotel = saveHotel(
+                "New Hotel",
+                "Downtown",
+                "Brand new hotel"
+        );
+
+        Page<Review> result = reviewRepository
+                .findByReservation_Room_Hotel_Name(
+                        "New Hotel",
+                        PageRequest.of(0, 10)
+                );
+
+        assertTrue(result.isEmpty());
+    }
 }

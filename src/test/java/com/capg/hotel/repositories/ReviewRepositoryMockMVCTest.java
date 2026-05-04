@@ -221,4 +221,40 @@ class ReviewRepositoryMockMvcTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is5xxServerError());
     }
+    
+    @Test
+    void testFindByHotelName_validName_returns200() throws Exception {
+        mockMvc.perform(get("/api/reviews/search/byHotelName")
+                        .param("name", "Oceanfront Resort & Spa")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+    }
+
+    @Test
+    void testFindByHotelName_returnsPageStructure() throws Exception {
+        mockMvc.perform(get("/api/reviews/search/byHotelName")
+                        .param("name", "Oceanfront Resort & Spa")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.page").exists())
+                .andExpect(jsonPath("$.page.totalElements").exists());
+    }
+
+    @Test
+    void testFindByHotelName_nonExistentName_returnsZeroElements() throws Exception {
+        mockMvc.perform(get("/api/reviews/search/byHotelName")
+                        .param("name", "Non Existent Hotel")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.page.totalElements").value(0));
+    }
+
+    @Test
+    void testFindByHotelName_missingParam_returns200WithEmpty() throws Exception {
+        mockMvc.perform(get("/api/reviews/search/byHotelName")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.page.totalElements").value(0));
+    }
 }

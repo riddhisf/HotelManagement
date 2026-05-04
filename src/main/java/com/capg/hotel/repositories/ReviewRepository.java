@@ -29,4 +29,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	@EntityGraph(attributePaths = {"reservation", "reservation.room", "reservation.room.hotel", "reservation.room.roomType"})
 	@RestResource(path = "byHotel", rel = "byHotel")
     Page<Review> findByReservation_Room_Hotel_HotelId(@Param("hotelId") Integer hotelId,Pageable pageable);
+    
+    @RestResource(path = "byHotelName", rel = "byHotelName")
+    Page<Review> findByReservation_Room_Hotel_Name(@Param("name") String name, Pageable pageable);
 }
